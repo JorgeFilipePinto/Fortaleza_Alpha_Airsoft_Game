@@ -1,9 +1,11 @@
 #include <Arduino.h>
 #include <RTClib.h>
 #include <../ClockRTC/ClockRTC.h>
+#include <../Leds/Leds.h>
 
 
 ClockRTC clockRTC = ClockRTC();
+Leds leds = Leds();
 
 void setup () {
     Serial.begin(115200);
@@ -11,12 +13,12 @@ void setup () {
 
     pinMode(10, OUTPUT);
     pinMode(0, INPUT_PULLDOWN);
-    clockRTC.tic = clockRTC.now();
 }
 
 
 void loop () {
     if(digitalRead(0) == HIGH) {
+        leds.test();
         if(clockRTC.isPassed(10)) {
             digitalWrite(10, HIGH);
             #ifdef DEBUG
@@ -29,7 +31,9 @@ void loop () {
             #endif
         }
     } else {
-        clockRTC.tic = clockRTC.now();
+        clockRTC.setTic();
+        leds.clear();
+        leds.setColor();
     }
 
     delay(50);

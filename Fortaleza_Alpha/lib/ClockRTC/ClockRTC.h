@@ -4,13 +4,11 @@
 
 class ClockRTC {
     private:
-
+        DateTime toc;
+        DateTime tic;
 
     public:
         RTC_DS3231 rtc;
-        
-        DateTime toc;
-        DateTime tic;
 
         ClockRTC();
 
@@ -25,5 +23,7 @@ class ClockRTC {
         float getTemperature();
 
         bool isPassed(int duration);
+
+        void setTic();
 };
 

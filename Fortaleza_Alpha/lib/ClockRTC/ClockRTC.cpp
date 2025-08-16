@@ -23,6 +23,9 @@ void ClockRTC::begin() {
         #endif
         this->rtc.adjust(DateTime(2025, 1, 1, 0, 0, 0));
     }
+
+    this->setTic();
+
     Serial.println("RTC initialized successfully");
 };
 
@@ -72,4 +75,9 @@ float ClockRTC::getTemperature() {
 bool ClockRTC::isPassed(int duration) {
     this->toc = this->rtc.now();
     return (this->toc.unixtime() - this->tic.unixtime()) > duration;
+};
+
+
+void ClockRTC::setTic() {
+    this->tic = this->rtc.now();
 };
