@@ -40,7 +40,7 @@ void taskContador(void *pvParameters) {
 void taskLeds(void *pvParameters) {
     for (;;) {
         if (botaoPressionado) {
-            leds.setColor();
+            leds.setColor(0, 0 ,255);
             if (tempoAtingido) {
                 leds.setColor(0, 150, 0);
                 digitalWrite(10, HIGH);
